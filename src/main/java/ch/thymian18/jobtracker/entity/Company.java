@@ -21,6 +21,5 @@ public class Company {
     private List<Application> applications = new ArrayList<>();
 
     private String name;
-    private String role;
     private String website;
 }
