@@ -4,8 +4,6 @@ import ch.thymian18.jobtracker.dto.CompanyRequestDto;
 import ch.thymian18.jobtracker.dto.CompanyResponseDto;
 import ch.thymian18.jobtracker.service.CompanyService;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
