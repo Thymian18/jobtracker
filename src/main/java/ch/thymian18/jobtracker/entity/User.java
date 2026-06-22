@@ -5,21 +5,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
-public class Company {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "company")
-    private List<Application> applications = new ArrayList<>();
+    @Column(unique = true)
+    private String username;
 
-    private String name;
-    private String website;
+    private String password;
+    private String role;
 }
