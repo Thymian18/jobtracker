@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "users")  // needed because "user" is a reserved keyword in PostgreSQL
 @NoArgsConstructor
 @Getter
 @Setter

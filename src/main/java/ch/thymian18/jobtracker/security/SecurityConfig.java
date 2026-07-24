@@ -6,6 +6,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,9 +36,9 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) {
         http
-                .csrf(csrf -> csrf.disable())   //csrf-protection not needed for JWT-based application; it would be for sessions/cookies-based application
+                .csrf(AbstractHttpConfigurer::disable)   //csrf-protection not needed for JWT-based application; it would be for sessions/cookies-based application
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))   //  sagt Spring Security explizit: "Erstelle keine Server-Side-Sessions." Jeder Request muss sich selbst über das JWT authentifizieren, der Server merkt sich zwischen Requests nichts.
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**")
