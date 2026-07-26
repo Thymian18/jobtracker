@@ -19,18 +19,24 @@ export const routes: Routes = [
     //         .then(m => m.ApplicationListComponent),
     //     canActivate: [authGuard]
     // },
-    // {
-    //     path: 'applications/new',
-    //     loadComponent: () => import('./components/application-form/application-form.component')
-    //         .then(m => m.ApplicationFormComponent),
-    //     canActivate: [authGuard]
-    // },
-    // {
-    //     path: 'applications/:id',
-    //     loadComponent: () => import('./components/application-detail/application-detail.component')
-    //         .then(m => m.ApplicationDetailComponent),
-    //     canActivate: [authGuard]
-    // },
+    {
+        path: 'applications/new',
+        loadComponent: () => import('./components/application-form/application-form')
+            .then(m => m.ApplicationFormComponent),
+        canActivate: [authGuard]
+    },
+    {
+        path: 'applications/:id/edit',
+        loadComponent: () => import('./components/application-form/application-form')
+            .then(m => m.ApplicationFormComponent),
+        canActivate: [authGuard]
+    },
+    {
+        path: 'applications/:id',
+        loadComponent: () => import('./components/application-detail/application-detail')
+            .then(m => m.ApplicationDetailComponent),
+        canActivate: [authGuard]
+    },
     {
         path: '',
         redirectTo: 'login',

@@ -1,0 +1,63 @@
+<div class="detail-container">
+    <div class="detail-header">
+        <button class="btn-back" (click)="goBack()">← Zurück</button>
+        <div class="header-actions" *ngIf="application">
+            <button class="btn-secondary" (click)="editApplication()">Bearbeiten</button>
+            <button class="btn-danger" (click)="deleteApplication()">Löschen</button>
+        </div>
+    </div>
+
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+    <div *ngIf="!application && !errorMessage" class="loading">
+        Wird geladen...
+    </div>
+
+    <div *ngIf="application" class="detail-content">
+        <div class="detail-main">
+            <h2>{{ application.position }}</h2>
+            <p class="company-name">{{ application.companyName }}</p>
+            <p class="applied-date">Beworben am: {{ application.appliedDate }}</p>
+
+            <div class="current-status">
+                <span>Aktueller Status:</span>
+                <span [class]="'status-badge ' + getStatusClass(application.status)">
+                    {{ application.status }}
+                </span>
+            </div>
+
+            <div class="status-change" *ngIf="application">
+                <h3>Status ändern</h3>
+                <div class="status-change-controls">
+                    <select [(ngModel)]="selectedStatus" name="status">
+                        <option *ngFor="let option of statusOptions" [value]="option">
+                            {{ option }}
+                        </option>
+                    </select>
+                    <button class="btn-primary" (click)="changeStatus()">
+                        Status aktualisieren
+                    </button>
+                </div>
+            </div>
+
+            <div class="job-posting" *ngIf="application.jobPostingText">
+                <h3>Stellenausschreibung</h3>
+                <p>{{ application.jobPostingText }}</p>
+            </div>
+        </div>
+
+        <div class="status-history">
+            <h3>Status-Verlauf</h3>
+            <div class="history-list">
+                <div
+                    class="history-item"
+                    *ngFor="let entry of application.statusHistory">
+                    <span [class]="'status-badge ' + getStatusClass(entry.status)">
+                        {{ entry.status }}
+                    </span>
+                    <span class="history-date">{{ entry.changedAt | date:'dd.MM.yyyy HH:mm' }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

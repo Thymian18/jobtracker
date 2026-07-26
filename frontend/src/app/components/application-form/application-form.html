@@ -1,0 +1,57 @@
+<div class="form-container">
+    <h2>{{ isEditMode ? 'Bewerbung bearbeiten' : 'Neue Bewerbung' }}</h2>
+
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label>Position *</label>
+            <input
+                type="text"
+                [(ngModel)]="formData.position"
+                name="position"
+                placeholder="z.B. Java Developer"
+                required
+            />
+        </div>
+
+        <div class="form-group">
+            <label>Firma *</label>
+            <select [(ngModel)]="formData.companyId" name="companyId" required>
+                <option value="0" disabled>Firma auswählen...</option>
+                <option *ngFor="let company of companies" [value]="company.id">
+                    {{ company.name }}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Bewerbungsdatum *</label>
+            <input
+                type="date"
+                [(ngModel)]="formData.appliedDate"
+                name="appliedDate"
+                required
+            />
+        </div>
+
+        <div class="form-group">
+            <label>Stellenausschreibung (optional)</label>
+            <textarea
+                [(ngModel)]="formData.jobPostingText"
+                name="jobPostingText"
+                rows="6"
+                placeholder="Stellenausschreibung hier einfügen..."
+            ></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="button" class="btn-secondary" (click)="onCancel()">
+                Abbrechen
+            </button>
+            <button type="submit" class="btn-primary">
+                {{ isEditMode ? 'Speichern' : 'Bewerbung erstellen' }}
+            </button>
+        </div>
+    </form>
+</div>
