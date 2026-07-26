@@ -108,9 +108,9 @@ Die Datenbankverbindung wird in `src/main/resources/application.yml` konfigurier
 
 - [x] Datenmodell & Repositories
 - [x] REST-API mit DTOs, Services, globalem Exception-Handling
-- [ ] Spring Security + JWT-Authentifizierung
-- [ ] LLM-Integration für Job-Posting-Analyse
-- [ ] Angular-Frontend
+- [x] Spring Security + JWT-Authentifizierung
+- [x] Angular-Frontend
 - [ ] Tests (Unit & Integration mit Testcontainers)
 - [ ] Docker & CI/CD
 - [ ] Deployment auf Azure
+- [ ] LLM-Integration für Job-Posting-Analyse
