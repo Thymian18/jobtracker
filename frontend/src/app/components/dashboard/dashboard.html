@@ -1,1 +1,43 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+    <header>
+        <h1>Job Application Tracker</h1>
+        <div class="header-actions">
+            <button class="btn-primary" (click)="navigateToNew()">
+                + Neue Bewerbung
+            </button>
+            <button class="btn-logout" (click)="logout()">
+                Logout
+            </button>
+        </div>
+    </header>
+
+    <div *ngIf="isLoading" class="loading">
+        Bewerbungen werden geladen...
+    </div>
+
+    <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+    </div>
+
+    <div *ngIf="!isLoading && applications.length === 0" class="empty">
+        Noch keine Bewerbungen vorhanden. Erstelle deine erste Bewerbung!
+    </div>
+
+    <div class="applications-grid" *ngIf="!isLoading && applications.length > 0">
+        <div
+            class="application-card"
+            *ngFor="let app of applications"
+            (click)="navigateToDetail(app.id)">
+            <div class="card-header">
+                <h3>{{ app.position }}</h3>
+                <span [class]="'status-badge ' + getStatusClass(app.status)">
+                    {{ app.status }}
+                </span>
+            </div>
+            <div class="card-body">
+                <p class="company">{{ app.companyName }}</p>
+                <p class="date">Beworben: {{ app.appliedDate }}</p>
+            </div>
+        </div>
+    </div>
+</div>
